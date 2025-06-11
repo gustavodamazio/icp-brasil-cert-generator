@@ -66,10 +66,10 @@ help:
 	@echo "  make examples-individual      # Generate only individual certificates"
 	@echo "  make clean                    # Clean up generated files"
 
-## Run: Run the application locally not compiled
+## Run: Run the application locally not compiled with arguments
 run:
 	@echo "Running the application locally..."
-	$(GOCMD) run ./cmd/main.go --help
+	$(GOCMD) run ./cmd/main.go $(ARGS)
 	@echo "✅ Application running"
 
 ## build: Build the application binary
