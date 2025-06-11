@@ -1,0 +1,57 @@
+
+{
+  "certificates": [
+    {
+      "name": "empresa_exemplo",
+      "type": "A3",
+      "person_type": "legal_entity",
+      "subject_name": "EMPRESA EXEMPLO LTDA",
+      "document": "12345678000195",
+      "email": "contato@empresa.com.br",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": ["empresa.com.br", "www.empresa.com.br"]
+    },
+    {
+      "name": "tech_solutions",
+      "type": "AE-S",
+      "person_type": "legal_entity",
+      "subject_name": "TECH SOLUTIONS S.A.",
+      "document": "98765432000123",
+      "email": "admin@techsolutions.com.br",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 4096,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": ["techsolutions.com.br", "www.techsolutions.com.br", "api.techsolutions.com.br"]
+    },
+    {
+      "name": "consultoria_brasil",
+      "type": "A4",
+      "person_type": "legal_entity",
+      "subject_name": "CONSULTORIA BRASIL EIRELI",
+      "document": "11223344000156",
+      "email": "certificados@consultoriabrasil.com.br",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": ["consultoriabrasil.com.br"]
+    }
+  ],
+  "output": {
+    "directory": "./.outputs/companies",
+    "formats": ["pem", "pfx", "cert"]
+  },
+  "security": {
+    "pfx_password": "companies456"
+  }
+}

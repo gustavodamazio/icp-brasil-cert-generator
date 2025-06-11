@@ -1,0 +1,27 @@
+
+{
+  "certificates": [
+    {
+      "name": "test_all_formats",
+      "type": "A3",
+      "person_type": "individual",
+      "subject_name": "TESTE TODOS FORMATOS",
+      "document": "12312312312",
+      "email": "teste@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    }
+  ],
+  "output": {
+    "directory": "./.outputs/all-formats",
+    "formats": ["pem", "pfx", "cert", "crt"]
+  },
+  "security": {
+    "pfx_password": "allformats"
+  }
+}

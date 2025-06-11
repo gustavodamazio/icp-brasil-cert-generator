@@ -1,0 +1,42 @@
+
+{
+  "certificates": [
+    {
+      "name": "individual_cert",
+      "type": "A3",
+      "person_type": "individual",
+      "subject_name": "JOAO DA SILVA",
+      "document": "12345678901",
+      "email": "joao.silva@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    },
+    {
+      "name": "company_cert",
+      "type": "A3",
+      "person_type": "legal_entity",
+      "subject_name": "EMPRESA EXEMPLO LTDA",
+      "document": "12345678000195",
+      "email": "contato@empresa.com.br",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": ["empresa.com.br", "www.empresa.com.br"]
+    }
+  ],
+  "output": {
+    "directory": "./.outputs",
+    "formats": ["pem", "pfx", "cert", "crt"]
+  },
+  "security": {
+    "pfx_password": "changeme"
+  }
+}

@@ -1,0 +1,57 @@
+
+{
+  "certificates": [
+    {
+      "name": "joao_silva",
+      "type": "A3",
+      "person_type": "individual",
+      "subject_name": "JOAO DA SILVA",
+      "document": "12345678901",
+      "email": "joao.silva@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    },
+    {
+      "name": "maria_santos",
+      "type": "A4",
+      "person_type": "individual",
+      "subject_name": "MARIA DOS SANTOS",
+      "document": "98765432109",
+      "email": "maria.santos@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    },
+    {
+      "name": "carlos_oliveira",
+      "type": "SE-S",
+      "person_type": "individual",
+      "subject_name": "CARLOS OLIVEIRA",
+      "document": "11122233344",
+      "email": "carlos.oliveira@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    }
+  ],
+  "output": {
+    "directory": "./.outputs/individuals",
+    "formats": ["pem", "pfx"]
+  },
+  "security": {
+    "pfx_password": "individuals123"
+  }
+}

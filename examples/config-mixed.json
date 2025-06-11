@@ -1,0 +1,72 @@
+
+{
+  "certificates": [
+    {
+      "name": "individual_a3",
+      "type": "A3",
+      "person_type": "individual",
+      "subject_name": "PEDRO HENRIQUE COSTA",
+      "document": "55566677788",
+      "email": "pedro.costa@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    },
+    {
+      "name": "startup_tech",
+      "type": "AE-H",
+      "person_type": "legal_entity",
+      "subject_name": "STARTUP TECH INOVACAO LTDA",
+      "document": "33344455000167",
+      "email": "ssl@startuptech.com.br",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 4096,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": ["startuptech.com.br", "*.startuptech.com.br", "api.startuptech.com.br"]
+    },
+    {
+      "name": "individual_se_h",
+      "type": "SE-H",
+      "person_type": "individual",
+      "subject_name": "ANA LUCIA FERREIRA",
+      "document": "99988877766",
+      "email": "ana.ferreira@example.com",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": []
+    },
+    {
+      "name": "ecommerce_company",
+      "type": "A4",
+      "person_type": "legal_entity",
+      "subject_name": "ECOMMERCE BRASIL COMERCIO ELETRONICO S.A.",
+      "document": "77788899000134",
+      "email": "certificados@ecommercebrasil.com.br",
+      "valid_from": "01/01/2024 00:00:00",
+      "valid_until": "01/01/2027 23:59:59",
+      "key_size": 2048,
+      "organization": "ICP-Brasil",
+      "org_unit": "Mock Certificate",
+      "country": "BR",
+      "dns_names": ["ecommercebrasil.com.br", "loja.ecommercebrasil.com.br", "pagamento.ecommercebrasil.com.br"]
+    }
+  ],
+  "output": {
+    "directory": "./.outputs/mixed",
+    "formats": ["pem", "pfx", "cert", "crt"]
+  },
+  "security": {
+    "pfx_password": "mixed789"
+  }
+}
