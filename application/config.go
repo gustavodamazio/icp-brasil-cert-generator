@@ -167,6 +167,8 @@ func (c *Config) toCertificateConfig(cert CertificateSettings) (domain.Certifica
 // parseCertificateType parses a string certificate type
 func parseCertificateType(typeStr string) (domain.CertificateType, error) {
 	switch typeStr {
+	case "A1":
+		return domain.TypeA1, nil
 	case "A3":
 		return domain.TypeA3, nil
 	case "A4":

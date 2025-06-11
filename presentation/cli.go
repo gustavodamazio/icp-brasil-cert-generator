@@ -113,7 +113,7 @@ Examples:
 
 	// Add flags
 	generateCmd.Flags().StringVarP(&configFile, "config", "c", "", "Configuration file path (supports multiple certificates)")
-	generateCmd.Flags().StringVarP(&certType, "type", "t", "A3", "Certificate type (A3, A4, SE-S, SE-H, AE-S, AE-H)")
+	generateCmd.Flags().StringVarP(&certType, "type", "t", "A3", "Certificate type (A1, A3, A4, SE-S, SE-H, AE-S, AE-H)")
 	generateCmd.Flags().StringVarP(&personType, "person-type", "p", "individual", "Person type (individual, legal_entity)")
 	generateCmd.Flags().StringVarP(&name, "name", "n", "", "Certificate holder name")
 	generateCmd.Flags().StringVarP(&document, "document", "d", "", "CPF (for individuals) or CNPJ (for legal entities)")

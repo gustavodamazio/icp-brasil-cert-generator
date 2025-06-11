@@ -11,6 +11,7 @@ import (
 type CertificateType string
 
 const (
+	TypeA1  CertificateType = "A1"   // Digital signature for individuals (software) - EXTINCT but supported for legacy
 	TypeA3  CertificateType = "A3"   // Digital signature for individuals (hardware)
 	TypeA4  CertificateType = "A4"   // Digital signature for individuals (hardware, higher security)
 	TypeSES CertificateType = "SE-S" // Electronic seal for legal entities (software)
@@ -193,6 +194,8 @@ func (c CertificateConfig) Validate() error {
 // GetPolicyOID returns the appropriate policy OID for the certificate type
 func (c CertificateConfig) GetPolicyOID() string {
 	switch c.Type {
+	case TypeA1:
+		return "2.16.76.1.2.1.1" // A1 certificate policy (legacy)
 	case TypeA3:
 		return "2.16.76.1.2.3.1" // A3 certificate policy
 	case TypeA4:
@@ -213,7 +216,7 @@ func (c CertificateConfig) GetPolicyOID() string {
 // GetKeyUsage returns the appropriate key usage for the certificate type
 func (c CertificateConfig) GetKeyUsage() KeyUsage {
 	switch c.Type {
-	case TypeA3, TypeA4:
+	case TypeA1, TypeA3, TypeA4:
 		return KeyUsage{
 			DigitalSignature: true,
 			NonRepudiation:   true,
