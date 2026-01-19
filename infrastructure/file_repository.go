@@ -45,6 +45,7 @@ func (r *FileRepository) SavePEM(cert *domain.Certificate, keyPath, certPath str
 }
 
 // SavePFX saves the certificate and private key in PFX/PKCS#12 format
+// Includes the complete CA chain like production certificates
 func (r *FileRepository) SavePFX(cert *domain.Certificate, path, password string) error {
 	// Ensure directory exists
 	if err := r.ensureDir(filepath.Dir(path)); err != nil {
@@ -52,10 +53,11 @@ func (r *FileRepository) SavePFX(cert *domain.Certificate, path, password string
 	}
 
 	// Encode to PFX using the modern encoder for security
+	// Include the CA chain if available (like production certificates)
 	pfxData, err := pkcs12.Modern2023.Encode(
 		cert.PrivateKey,
 		cert.X509Cert,
-		nil, // CA certificates (nil for end-entity certificates)
+		cert.CAChain, // Include CA certificates chain
 		password,
 	)
 	if err != nil {
@@ -130,13 +132,8 @@ func (r *FileRepository) savePrivateKeyPEM(cert *domain.Certificate, keyPath str
 }
 
 // saveCertificatePEM saves the certificate in PEM format
+// Includes the complete CA chain like production certificates
 func (r *FileRepository) saveCertificatePEM(cert *domain.Certificate, certPath string) error {
-	// Create PEM block
-	certPEM := &pem.Block{
-		Type:  "CERTIFICATE",
-		Bytes: cert.X509Cert.Raw,
-	}
-
 	// Create certificate file
 	certFile, err := os.OpenFile(certPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
@@ -144,9 +141,24 @@ func (r *FileRepository) saveCertificatePEM(cert *domain.Certificate, certPath s
 	}
 	defer certFile.Close()
 
-	// Write PEM encoded certificate
+	// Write end-entity certificate first
+	certPEM := &pem.Block{
+		Type:  "CERTIFICATE",
+		Bytes: cert.X509Cert.Raw,
+	}
 	if err := pem.Encode(certFile, certPEM); err != nil {
 		return domain.NewPersistenceErrorWithCause("failed to write certificate PEM", err)
+	}
+
+	// Write CA chain certificates (Issuing CA → Intermediate CA → Root CA)
+	for _, caCert := range cert.CAChain {
+		caPEM := &pem.Block{
+			Type:  "CERTIFICATE",
+			Bytes: caCert.Raw,
+		}
+		if err := pem.Encode(certFile, caPEM); err != nil {
+			return domain.NewPersistenceErrorWithCause("failed to write CA certificate PEM", err)
+		}
 	}
 
 	return nil

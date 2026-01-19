@@ -40,12 +40,16 @@ func TestCertificateGeneration(t *testing.T) {
 	assert.NotNil(t, cert)
 	assert.Equal(t, domain.TypeA3, cert.Type)
 	assert.Equal(t, domain.PersonTypeIndividual, cert.PersonType)
-	assert.Equal(t, "JOAO DA SILVA", cert.SubjectDN.CommonName)
+	// CN format is now NAME:DOCUMENT like production certificates
+	assert.Equal(t, "JOAO DA SILVA:12345678901", cert.SubjectDN.CommonName)
 	assert.Equal(t, "12345678901", cert.SubjectDN.SerialNumber)
 	assert.Equal(t, "ICP-Brasil", cert.SubjectDN.Organization)
 	assert.Equal(t, "BR", cert.SubjectDN.Country)
 	assert.NotNil(t, cert.PrivateKey)
 	assert.NotNil(t, cert.X509Cert)
+	// Verify CA chain is included
+	assert.NotNil(t, cert.CAChain)
+	assert.Len(t, cert.CAChain, 3) // Issuing CA, Intermediate CA, Root CA
 }
 
 func TestCertificateGenerationWithInvalidConfig(t *testing.T) {
@@ -72,13 +76,14 @@ func TestCAGeneration(t *testing.T) {
 	repository := infrastructure.NewFileRepository()
 	generator := application.NewCertificateGeneratorService(repository)
 
-	// Act
+	// Act - GenerateCA now returns the Issuing CA (AC Mock Multipla)
 	ca, err := generator.GenerateCA()
 
 	// Assert
 	require.NoError(t, err)
 	assert.NotNil(t, ca)
-	assert.Equal(t, "ICP-Brasil Mock CA", ca.SubjectDN.CommonName)
+	// The returned CA is now the Issuing CA (AC Mock Multipla) which signs end-entity certs
+	assert.Equal(t, "AC Mock Multipla", ca.SubjectDN.CommonName)
 	assert.Equal(t, "ICP-Brasil", ca.SubjectDN.Organization)
 	assert.Equal(t, "BR", ca.SubjectDN.Country)
 	assert.NotNil(t, ca.PrivateKey)
@@ -220,19 +225,23 @@ func TestMultipleCertificateGeneration(t *testing.T) {
 	cert1 := certificates[0]
 	assert.Equal(t, domain.TypeA3, cert1.Type)
 	assert.Equal(t, domain.PersonTypeIndividual, cert1.PersonType)
-	assert.Equal(t, "JOAO DA SILVA", cert1.SubjectDN.CommonName)
+	// CN format is now NAME:DOCUMENT like production certificates
+	assert.Equal(t, "JOAO DA SILVA:12345678901", cert1.SubjectDN.CommonName)
 	assert.Equal(t, "12345678901", cert1.SubjectDN.SerialNumber)
 	assert.NotNil(t, cert1.PrivateKey)
 	assert.NotNil(t, cert1.X509Cert)
+	assert.NotNil(t, cert1.CAChain)
 
 	// Test second certificate (company)
 	cert2 := certificates[1]
 	assert.Equal(t, domain.TypeA4, cert2.Type)
 	assert.Equal(t, domain.PersonTypeLegalEntity, cert2.PersonType)
-	assert.Equal(t, "EMPRESA LTDA", cert2.SubjectDN.CommonName)
+	// CN format is now NAME:DOCUMENT like production certificates
+	assert.Equal(t, "EMPRESA LTDA:12345678000195", cert2.SubjectDN.CommonName)
 	assert.Equal(t, "12345678000195", cert2.SubjectDN.SerialNumber)
 	assert.NotNil(t, cert2.PrivateKey)
 	assert.NotNil(t, cert2.X509Cert)
+	assert.NotNil(t, cert2.CAChain)
 }
 
 func TestSaveMultipleCertificates(t *testing.T) {

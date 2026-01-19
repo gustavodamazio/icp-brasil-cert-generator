@@ -47,6 +47,7 @@ type Certificate struct {
 	Extensions     Extensions
 	PrivateKey     *rsa.PrivateKey
 	X509Cert       *x509.Certificate
+	CAChain        []*x509.Certificate // Complete CA certificate chain (Issuing CA → Intermediate CA → Root CA)
 }
 
 // SubjectDN represents the Distinguished Name structure for ICP Brasil certificates
